@@ -33,8 +33,26 @@ Usually, regularly used extrudate has decent amount of water concentration and i
 
 The best optimized Hydrated PSD from the dry_Extrudate is the projective perpendicular point on the "purple plane" from the known Hydrated PSD of the regular_extrudate. From this, the two scalars for vectors "Dry_fine" and "Dry_medium" required to meet the optimized vector (origin to the projective point) equal to the amount needed from the prehydrated dry_extrudate.
 
-$$\begin{bmatrix}
-dm-Large & df-Large \\ 
-dm-Medium & df-Medium\\ 
-dm-Fine & df-Fine
-\end{bmatrix}
+#### Math Formula:
+
+<br /> $\ x=\ \left(A^{T}A\right)^{-1}A^{T}y$
+<pre>
+From the formula, output "x" is the (2x1) matrix contains <b>amount</b> of medium and fine prehydrated dry_extrudate we need to used 
+
+x = [dry_medium]
+    [dry_fine  ]
+
+"A" is a (3x2) matrix, represents the "purprle plane" or all possible combination of hydrated PSD from given dry_extrudate. This matrix would contains information of hydrated PSD <b>ratio</b> of "Dry_medium" and "Dry_fine." 
+
+A = [Dry_medium_Large     Dry_fine_Large ]
+    [Dry_medium_Medium    Dry_fine_Medium]
+    [Dry_medium_Fine      Dry_fine_Fine  ]
+    
+"y" is a (3x1) matrix, contains the information of the <b>amount</b> hydrated PSD of the regular extrudate, or the "Control PSD"
+
+y = [control_Large ]
+    [control_Medium]
+    [control_Fine  ]    
+  
+<pre>
+source: https://jeffycyang.github.io/from-least-squares-regression-to-the-fundamental-theorem-of-linear-algebra/index.html
