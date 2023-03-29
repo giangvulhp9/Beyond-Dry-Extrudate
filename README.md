@@ -6,8 +6,14 @@ Common mixing process:
 <br /> 1/ Extrudate are sieved and classified into Large, Medium, and Fine (pre-hydrated PSD). This is also what we measure.
 <br /> 2/ Sieved extrudate will then be hydrated (hydrated-extrudate) for certain amount of time before adding other ingredients in.
 
+![Dry extrudate](https://user-images.githubusercontent.com/129092996/228688552-fac56ee3-e064-4a9c-9f22-ee48f14af9da.png)
+
+
+
 Usually, regularly used extrudate has decent amount of water concentration and is stored in a freezer to prevent microbio growth. To reduce cost of operation, Dry extrudate with significanly less water concentration is proposed as it can be stored in room temperature and last longer. However, we concern that using Dry extrudate might cause changes in texture of products
+
 <br /> Objective: Replace regular extrudate with Dry extrudate without compensation in texture. 
+
 <br /> Assumption: texture of products is solely dictated by the hydrated particle size distribution (PSD).
 
 <br />*Input*: 
