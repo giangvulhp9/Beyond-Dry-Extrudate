@@ -7,7 +7,6 @@ st.title('Dry Extrudate Calculator :computer:')
 def hydrated_regular_extrudate_components(Regular_large, Regular_Medium, Regular_Fine, s1, s2, s3):
     """
     s1, s2 and s3 are ratio of dry large, medium and fine use in the final product
-
     """
     return s1*Regular_large + s2*Regular_Medium + s3*Regular_Fine
 st.write("#")
@@ -63,22 +62,37 @@ with col4:
     st.write('From hydrated PSD ratio of Dry_medium is:')
     DM_large = st.slider('large',float (0),float(1),0.01, None, None, 5)
     DM_medium = st.slider('medium',float (0),float(1),0.01, None, None, 6)
+    DM_fine = st.slider('medium',float (0),float(1),0.01, None, None, 7)
 
 with col5:
     st.write('From hydrated PSD ratio of Dry_fine is:')
-    DF_medium = st.slider('medium',float (0),float(1),0.01, None, None, 7)
-    DF_fine = st.slider('fine',float (0),float(1),0.01, None, None, 8)
+    DF_medium = st.slider('medium',float (0),float(1),0.01, None, None, 8)
+    DF_fine = st.slider('fine',float (0),float(1),0.01, None, None, 9)
 
 
 
-HDE = np.array ([[DM_large, 0],[DM_medium, DF_medium],[0, DF_fine]])
-result = optimization_dry_extrudate_needed (HDE, HRE)
-final_ratio = np.dot(HDE, result)
+HDE = np.array ([[DM_large, 0],[DM_medium, DF_medium],[DM_fine, DF_fine]])
+dry_extrudate_needed = optimization_dry_extrudate_needed (HDE, HRE)
+final_ratio = np.dot(HDE, dry_extrudate_needed)
+
+
+
+def optimized_ratio_and_protein_balanced (s1, s2, s3, balanced_dry):
+      total_regular = s1 + s2 + s3
+      pro_bal = balanced_dry / 100 *total_regular
+      initial_dry = dry_extrudate_needed[0] + dry_extrudate_needed[1]
+      optimized_protein_balanced_ratio = dry_extrudate_needed * (pro_bal/ initial_dry)
+      return optimized_protein_balanced_ratio
+
+balanced_dry = st.number_input ('For 100 grams of Regular extrudate, amount of Dry_extrudate needed for protein balanced (in grams) is')
+optimized = optimized_ratio_and_protein_balanced (s1, s2, s3, balanced_dry)
+Dry_PSD_protein_balanced= np.dot(HDE, optimized)
+
 
 st.write("####")
 st.header('Result')
 st.write("#")
 st.write('Amount of Dry extrudate needed is (Medium : Fine) ')
-st.write(result)
+st.write(optimized)
 st.write('From that, the PSD of the Dry extrudate after hydration will be (Large: Medium: Fine)')
-st.write(final_ratio)
+st.write(Dry_PSD_protein_balanced)
